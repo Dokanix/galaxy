@@ -1,9 +1,9 @@
-import "./style.css";
-import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import * as dat from "dat.gui";
-import galaxyVertexShader from "./shaders/galaxy/vertex.glsl";
-import galaxyFragmentShader from "./shaders/galaxy/fragment.glsl";
+import './style.css';
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import * as dat from 'dat.gui';
+import galaxyVertexShader from './shaders/galaxy/vertex.glsl';
+import galaxyFragmentShader from './shaders/galaxy/fragment.glsl';
 
 /**
  * Base
@@ -12,7 +12,7 @@ import galaxyFragmentShader from "./shaders/galaxy/fragment.glsl";
 const gui = new dat.GUI();
 
 // Canvas
-const canvas = document.querySelector("canvas.webgl");
+const canvas = document.querySelector('canvas.webgl');
 
 // Scene
 const scene = new THREE.Scene();
@@ -28,8 +28,8 @@ const parameters = {
   spin: 1,
   randomness: 0.2,
   randomnessPower: 3,
-  insideColor: "#ff6600",
-  outsideColor: "#0000ff",
+  insideColor: '#ff6600',
+  outsideColor: '#0000ff',
 };
 
 let geometry = null;
@@ -88,11 +88,11 @@ const generateGalaxy = () => {
     scales[i] = Math.random();
   }
 
-  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-  geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-  geometry.setAttribute("aScale", new THREE.BufferAttribute(scales, 1));
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+  geometry.setAttribute('aScale', new THREE.BufferAttribute(scales, 1));
   geometry.setAttribute(
-    "aRandomness",
+    'aRandomness',
     new THREE.BufferAttribute(randomness, 3)
   );
 
@@ -112,17 +112,17 @@ const generateGalaxy = () => {
   scene.add(points);
 };
 
-gui.add(parameters, "count", 100, 100000, 100).onFinishChange(generateGalaxy);
-gui.add(parameters, "size", 0.001, 0.1, 0.001).onFinishChange(generateGalaxy);
-gui.add(parameters, "radius", 0.01, 20, 0.01).onFinishChange(generateGalaxy);
-gui.add(parameters, "branches", 2, 20, 1).onFinishChange(generateGalaxy);
-gui.add(parameters, "spin", -5, 5, 0.001).onFinishChange(generateGalaxy);
-gui.add(parameters, "randomness", 0, 2, 0.01).onFinishChange(generateGalaxy);
+gui.add(parameters, 'count', 100, 100000, 100).onFinishChange(generateGalaxy);
+gui.add(parameters, 'size', 0.001, 0.1, 0.001).onFinishChange(generateGalaxy);
+gui.add(parameters, 'radius', 0.01, 20, 0.01).onFinishChange(generateGalaxy);
+gui.add(parameters, 'branches', 2, 20, 1).onFinishChange(generateGalaxy);
+gui.add(parameters, 'spin', -5, 5, 0.001).onFinishChange(generateGalaxy);
+gui.add(parameters, 'randomness', 0, 2, 0.01).onFinishChange(generateGalaxy);
 gui
-  .add(parameters, "randomnessPower", 1, 10, 0.001)
+  .add(parameters, 'randomnessPower', 1, 10, 0.001)
   .onFinishChange(generateGalaxy);
-gui.addColor(parameters, "insideColor").onFinishChange(generateGalaxy);
-gui.addColor(parameters, "outsideColor").onFinishChange(generateGalaxy);
+gui.addColor(parameters, 'insideColor').onFinishChange(generateGalaxy);
+gui.addColor(parameters, 'outsideColor').onFinishChange(generateGalaxy);
 
 /**
  * Textures
@@ -137,7 +137,7 @@ const sizes = {
   height: window.innerHeight,
 };
 
-window.addEventListener("resize", () => {
+window.addEventListener('resize', () => {
   // Update sizes
   sizes.width = window.innerWidth;
   sizes.height = window.innerHeight;
@@ -188,7 +188,7 @@ const tick = () => {
   const elapsedTime = clock.getElapsedTime();
 
   // Update material
-  material.uniforms.uTime.value = elapsedTime;
+  material.uniforms.uTime.value = elapsedTime * 0.1;
 
   // Update controls
   controls.update();
